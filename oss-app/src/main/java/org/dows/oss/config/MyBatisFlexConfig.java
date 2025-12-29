@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * MyBatis-Flex配置类
- * 
+ *
  * @author dows
  * @version 1.0.0
  */
-@MapperScan("org.dows.project.mapper")
+@MapperScan("org.dows.oss.mapper")
 @Configuration
 public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
 
@@ -25,14 +25,14 @@ public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
     public void customize(FlexGlobalConfig globalConfig) {
         // 开启审计功能
         AuditManager.setAuditEnable(true);
-        
+
         // 设置 SQL 审计收集器
         MessageCollector collector = new ConsoleMessageCollector();
         AuditManager.setMessageCollector(collector);
-        
+
         // 配置逻辑删除
         globalConfig.setLogicDeleteColumn("deleteTime");
-        
+
         // 配置乐观锁
         globalConfig.setVersionColumn("revision");
 
@@ -41,7 +41,7 @@ public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
 
         // 注册审计字段插入监听器
         //globalConfig.registerInsertListener(auditFieldInsertListener(), Object.class);
-        
+
         // 注册全局更新监听器
         //globalConfig.registerUpdateListener(auditFieldUpdateListener(), Object.class);
     }
@@ -54,7 +54,7 @@ public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
         return new ConsoleMessageCollector();
     }
 
-    
+
     /**
      * 审计字段插入监听器
      */
@@ -62,7 +62,7 @@ public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
     public AuditFieldInsertListener auditFieldInsertListener() {
         return new AuditFieldInsertListener();
     }
-    
+
     /**
      * 审计字段更新监听器
      */
